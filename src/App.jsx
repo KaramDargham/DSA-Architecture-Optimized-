@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -568,7 +568,6 @@ function App() {
             >
               Explore Projects
             </button>
-            <a href="#about">↓ Scroll to discover</a>
           </div>
           <div className="hero-points fade-up">
             <span>
@@ -591,7 +590,11 @@ function App() {
             Mixed-Use ·
           </div>
         </div>
+         <a href="#about" className="scroll-discover">
+              <span className="scroll-arrow"></span>
+            </a>
       </section>
+      
       <section id="about" className="dot-grid-bg">
         <div className="about-left">
           <p>
@@ -617,24 +620,21 @@ function App() {
         </div>
       </section>
       <section id="services">
-        <div className="services-left">
-          {services.map((service, i) => (
-            <img
-              id={`service-img-${i + 1}`}
-              key={service.title}
-              src={service.image}
-              alt={service.title}
-              loading="lazy"
-              decoding="async"
-              className={i === 0 ? "active" : ""}
-            />
-          ))}
-        </div>
-        <div className="services-right">
-          {services.map((service, i) => (
+        {services.map((service, i) => (
+          <React.Fragment key={service.id}>
+            <div className="service-image-wrapper">
+              <img
+                id={`service-img-${i + 1}`}
+                src={service.image}
+                alt={service.title}
+                loading="lazy"
+                decoding="async"
+                className={i === 0 ? "active" : ""}
+              />
+            </div>
             <article
-              key={service.id}
               id={`service-block-${i + 1}`}
+              className="service-content-wrapper"
               ref={(el) => {
                 servicesRef.current[i] = el;
               }}
@@ -653,8 +653,8 @@ function App() {
                 </ul>
               </div>
             </article>
-          ))}
-        </div>
+          </React.Fragment>
+        ))}
       </section>
       <section id="projects">
         <div className="projects-head">
