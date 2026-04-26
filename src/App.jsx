@@ -620,21 +620,24 @@ function App() {
         </div>
       </section>
       <section id="services">
-        {services.map((service, i) => (
-          <React.Fragment key={service.id}>
-            <div className="service-image-wrapper">
-              <img
-                id={`service-img-${i + 1}`}
-                src={service.image}
-                alt={service.title}
-                loading="lazy"
-                decoding="async"
-                className={i === 0 ? "active" : ""}
-              />
-            </div>
+        <div className="services-left">
+          {services.map((service, i) => (
+            <img
+              id={`service-img-${i + 1}`}
+              key={service.title}
+              src={service.image}
+              alt={service.title}
+              loading="lazy"
+              decoding="async"
+              className={i === 0 ? "active" : ""}
+            />
+          ))}
+        </div>
+        <div className="services-right">
+          {services.map((service, i) => (
             <article
+              key={service.id}
               id={`service-block-${i + 1}`}
-              className="service-content-wrapper"
               ref={(el) => {
                 servicesRef.current[i] = el;
               }}
@@ -653,8 +656,8 @@ function App() {
                 </ul>
               </div>
             </article>
-          </React.Fragment>
-        ))}
+          ))}
+        </div>
       </section>
       <section id="projects">
         <div className="projects-head">
